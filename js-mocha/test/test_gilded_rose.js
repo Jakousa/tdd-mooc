@@ -118,6 +118,42 @@ describe("Aged Brie", function() {
     const items = gildedRose.updateQuality();
     expect(items[0].quality).to.equal(50);
   })
+
+  it("quality does not increase when sellin is at 1 and quality at 40", function() {
+    const gildedRose = new Shop([ new Item("Aged Brie", 1, 40) ]);
+    const items = gildedRose.updateQuality();
+    expect(items[0].quality).to.equal(41);
+  })
+
+  it("quality does not increase when sellin is at 0 and quality at 40", function() {
+    const gildedRose = new Shop([ new Item("Aged Brie", 0, 40) ]);
+    const items = gildedRose.updateQuality();
+    expect(items[0].quality).to.equal(42);
+  })
+
+  it("quality does not increase when sellin is below 0 and quality at 40", function() {
+    const gildedRose = new Shop([ new Item("Aged Brie", -1, 40) ]);
+    const items = gildedRose.updateQuality();
+    expect(items[0].quality).to.equal(42);
+  })
+
+  it("quality does not increase when sellin is at 1 and quality at 55", function() {
+    const gildedRose = new Shop([ new Item("Aged Brie", 1, 55) ]);
+    const items = gildedRose.updateQuality();
+    expect(items[0].quality).to.equal(55);
+  })
+
+  it("quality does not increase when sellin is at 0 and quality at 55", function() {
+    const gildedRose = new Shop([ new Item("Aged Brie", 0, 55) ]);
+    const items = gildedRose.updateQuality();
+    expect(items[0].quality).to.equal(55);
+  })
+
+  it("quality does not increase when sellin is below 0 and quality at 55", function() {
+    const gildedRose = new Shop([ new Item("Aged Brie", -1, 55) ]);
+    const items = gildedRose.updateQuality();
+    expect(items[0].quality).to.equal(55);
+  })
 })
 
 describe("Sulfuras, Hand of Ragnaros", function() {
