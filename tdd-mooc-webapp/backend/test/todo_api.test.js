@@ -4,7 +4,7 @@ const request = require("supertest");
 
 const todopath = `/api/todos`;
 
-describe("Todos", function () {
+describe("Todos api", function () {
   it("should say hello", function (done) {
     request(app)
       .get("/api")

@@ -3,7 +3,7 @@ const expect = chai.expect
 const Todo = require('../models/Todo')
 chai.use(require('chai-as-promised'))
 
-describe("Todo", function () {
+describe("Todo model", function () {
   it("should save a todo with text and set completed as false", async function () {
     const todo = await Todo.query().insertAndFetch({ text: "Say Hello" }).execute()
     expect(todo.completed).to.equal(false)
