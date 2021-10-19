@@ -1,9 +1,19 @@
-const express = require('express');
+const express = require("express");
 
 const app = express();
+const apiRouter = express.Router();
+const todoRouter = express.Router();
 
-app.get('/api', (_, res) => {
-  res.send('Hello from backend')
+apiRouter.get("/", (_, res) => {
+  res.send("Hello from backend");
+});
+
+todoRouter.get("/", (_, res) => {
+  res.send([])
 })
 
-module.exports = app
+apiRouter.use('/todos', todoRouter)
+app.use('/api', apiRouter)
+
+
+module.exports = app;
