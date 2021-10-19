@@ -2,7 +2,9 @@ const app = require('../app');
 const { expect } = require('chai');
 const request = require('supertest');
 
-describe('Todo', function() {
+const todopath = `/api/todos`
+
+describe('Todos', function() {
   it('should say hello', function(done) {
     request(app)
       .get('/api')
@@ -12,4 +14,15 @@ describe('Todo', function() {
         done();
       });
   });
+
+  it('should respond with an empty array', function(done) {
+    request(app)
+      .get(todopath)
+      .end(function(err, res) {
+        expect(res.body).to.be.an('array');
+        expect(res.statusCode).to.equal(200);
+        done();
+      });
+  });
+
 });
