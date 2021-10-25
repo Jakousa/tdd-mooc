@@ -1,4 +1,5 @@
 const express = require("express");
+require("./models/connection")
 
 const app = express();
 const apiRouter = express.Router();
