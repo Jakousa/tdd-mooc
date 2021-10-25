@@ -14,7 +14,6 @@ apiRouter.get("/", (_, res) => {
 
 todoRouter.get("/", async (_, res) => {
   const todos = await Todo.query().select('todos.*')
-  console.log(todos)
   res.send(todos)
 })
 
