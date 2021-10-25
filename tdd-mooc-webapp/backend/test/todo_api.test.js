@@ -75,4 +75,15 @@ describe("Todos api", function () {
         done();
       });
   });
+
+  it("should send new todo to Todo model", function (done) {
+    const spy = sinon.spy(Todo, "query")
+    request(app)
+      .post(todopath)
+      .send({ text: "Say Hello" })
+      .end(function (_, res) {
+        expect(spy.calledOnce).to.be.true
+        done();
+      });
+  });
 });
