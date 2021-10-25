@@ -1,10 +1,40 @@
-const app = require("../app");
 const { expect } = require("chai");
 const request = require("supertest");
+const sinon = require("sinon")
+const { QueryBuilder } = require('objection');
+
+const app = require("../app");
+const Todo = require('../models/Todo')
+const { createDatabase } = require("./helpers");
+
 
 const todopath = `/api/todos`;
 
 describe("Todos api", function () {
+  let destroyDB;
+  let useDB;
+
+  this.beforeAll(async function () {
+
+    const { dropDatabase, useDatabase } = await createDatabase("model");
+    useDB = useDatabase;
+    destroyDB = dropDatabase;
+
+    await useDB();
+  });
+
+  this.beforeEach(function () {
+    sinon.stub(Todo, "query").value(() => QueryBuilder.forClass(Todo).resolve([]))
+  })
+
+  this.afterEach(async function () {
+    sinon.restore()
+  });
+
+  this.afterAll(async function () {
+    await destroyDB();
+  });
+
   it("should say hello", function (done) {
     request(app)
       .get("/api")
@@ -24,6 +54,16 @@ describe("Todos api", function () {
         done();
       });
   });
+
+  it("should ask Todo model for the todos", function (done) {
+    const spy = sinon.spy(Todo, "query")
+    request(app)
+      .get(todopath)
+      .end(function(_, res) {
+        expect(spy.calledOnce).to.be.true
+        done();
+      })
+  })
 
   it("should accept a new todo", function (done) {
     request(app)

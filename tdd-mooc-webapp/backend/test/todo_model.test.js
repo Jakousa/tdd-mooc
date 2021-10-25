@@ -1,4 +1,3 @@
-const { Model, transaction } = require("objection");
 const chai = require("chai");
 const expect = chai.expect;
 const Todo = require("../models/Todo");
