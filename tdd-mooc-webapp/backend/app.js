@@ -17,8 +17,13 @@ todoRouter.get("/", async (_, res) => {
   res.send(todos)
 })
 
-todoRouter.post("/", (req, res) => {
-  res.send(req.body)
+todoRouter.post("/", async (req, res) => {
+  const { text } = req.body
+  const todo = await Todo.query().insert({
+    text
+  })
+
+  res.send(todo)
 })
 
 apiRouter.use('/todos', todoRouter)
