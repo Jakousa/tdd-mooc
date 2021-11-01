@@ -22,6 +22,13 @@ test('includes a TodoList', async () => {
   expect(linkElement).toBeInTheDocument();
 });
 
+test('includes a TodoInput', async () => {
+  sinon.stub(useGetTodos, 'default').returns([{ text: 'Hello 1'}, { text: 'Hello 2'}])
+
+  const utils = render(<App />);
+  utils.getByLabelText('todo-input')
+});
+
 afterEach(() => {
   sinon.restore()
 })
