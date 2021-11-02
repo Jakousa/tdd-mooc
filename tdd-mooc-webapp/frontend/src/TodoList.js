@@ -1,11 +1,11 @@
 import React from 'react'
 
-const TodoList = ({ todos }) => {
-  return (
-    <>
-    {todos.map(todo => todo.text)}
-    </>
-  )
-}
+import Todo from './Todo'
+
+const TodoList = ({ todos }) => (
+  <>
+  {todos.map(todo => <Todo key={todo.id} todo={todo} />)}
+  </>
+)
 
 export default TodoList

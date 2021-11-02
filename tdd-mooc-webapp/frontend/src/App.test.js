@@ -13,8 +13,6 @@ test('renders Hello from frontend', () => {
 });
 
 test('includes a TodoList', async () => {
-  sinon.stub(useGetTodos, 'default').returns([{ text: 'Hello 1'}, { text: 'Hello 2'}])
-
   render(<App />);
   await waitFor(() => screen.getByText(/Hello 1/i))
   const linkElement = screen.getByText(/Hello 1/i);
@@ -23,11 +21,14 @@ test('includes a TodoList', async () => {
 });
 
 test('includes a TodoInput', async () => {
-  sinon.stub(useGetTodos, 'default').returns([{ text: 'Hello 1'}, { text: 'Hello 2'}])
-
   const utils = render(<App />);
   utils.getByLabelText('todo-input')
 });
+
+beforeEach(() => {
+  const todos = ['Hello 1', 'Hello 2'].map((text, idx) => ({ id: idx, text }))
+  sinon.stub(useGetTodos, 'default').returns(todos)
+})
 
 afterEach(() => {
   sinon.restore()

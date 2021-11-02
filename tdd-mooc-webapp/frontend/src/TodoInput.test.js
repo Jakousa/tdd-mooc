@@ -24,7 +24,7 @@ test('renders an button for sending todos', () => {
 
 test('input value is sent by button', () => {
   const addTodoStub = sinon.stub()
-  sinon.stub(useAddTodo, 'default').returns([{ text: 'Hello 1', completed: false }, addTodoStub])
+  sinon.stub(useAddTodo, 'default').returns([{ id: 1, text: 'Hello 1', completed: false }, addTodoStub])
 
   const { input, button } = setup()
 
