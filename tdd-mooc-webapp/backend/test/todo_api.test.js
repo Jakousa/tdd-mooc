@@ -86,4 +86,51 @@ describe("Todos api", function () {
         done();
       });
   });
+
+  it.only("should accept a todo and return it", function (done) {
+    const path = todopath + '/123'
+
+    request(app)
+      .put(path)
+      .send({ completed: true })
+      .end(function (_, res) {
+        expect(res.statusCode).to.equal(200);
+        done();
+      });
+  });
+
+  it("should send todo to Todo model", function (done) {
+    const path = todopath + '/123'
+    const spy = sinon.spy(Todo, "query")
+    request(app)
+      .put(path)
+      .send({ completed: true })
+      .end(function (_, res) {
+        expect(spy.calledOnce).to.be.true
+        done();
+      });
+  });
+
+  it("should delete a todo and return no content", function (done) {
+    const path = todopath + '/123'
+
+    request(app)
+      .delete(path)
+      .end(function (_, res) {
+        expect(res.statusCode).to.equal(204);
+        done();
+      });
+  });
+
+  it("should send id to Todo model", function (done) {
+    const path = todopath + '/123'
+    const spy = sinon.spy(Todo, "query")
+    request(app)
+      .delete(path)
+      .send({ completed: true })
+      .end(function (_, res) {
+        expect(spy.calledOnce).to.be.true
+        done();
+      });
+  });
 });

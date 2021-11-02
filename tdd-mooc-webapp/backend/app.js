@@ -26,6 +26,20 @@ todoRouter.post("/", async (req, res) => {
   res.send(todo)
 })
 
+todoRouter.put("/:id", async (req, res) => {
+  const { id } = req.params
+
+  const todo = await Todo.query().patchAndFetchById(id, req.body);
+  res.send(todo)
+})
+
+todoRouter.delete("/:id", async (req, res) => {
+  const { id } = req.params
+
+  await Todo.query().deleteById(id)
+  res.sendStatus(204)
+})
+
 apiRouter.use('/todos', todoRouter)
 app.use('/api', apiRouter)
 
