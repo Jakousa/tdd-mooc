@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import apiClient from './apiClient'
 
-const useGetTodos = () => {
+const useAddTodo = () => {
   const [response, setResponse] = useState(undefined)
 
   const addTodo = async (todo) => {
@@ -12,4 +12,4 @@ const useGetTodos = () => {
   return [response, addTodo]
 }
 
-export default useGetTodos
+export default useAddTodo
