@@ -19,6 +19,14 @@ test('is a hook that updates todo as completed and returns it', async () => {
   expect(result.current[0].completed).toEqual(true)
 });
 
+test('accepts todo as parameter and returns it by default', async () => {
+  const todo = { id: 1, text: 'Hello 1', completed: false}
+  const { result } = renderHook(() => useUpdateTodo(todo))
+  const [todoFromHook] = result.current
+
+  expect(todoFromHook).toEqual(todo)
+})
+
 afterEach(() => {
   sinon.restore()
 })
