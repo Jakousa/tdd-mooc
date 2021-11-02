@@ -5,7 +5,7 @@ import apiClient from './apiClient'
 
 import useAddTodo from './useAddTodo';
 
-test('is a hook that returns list of todos', async () => {
+test('is a hook that posts todo and returns response', async () => {
   const todo = { id: 1, text: 'Hello 1', completed: false}
   sinon.stub(apiClient, "post").callsFake((url, data) => ({ data }))
 
