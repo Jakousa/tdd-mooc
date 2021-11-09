@@ -45,6 +45,26 @@ export const decode = (RLE) => {
   return array
 }
 
-export const encode = () => {
-  
+export const encode = (array) => {
+  const y = array.length
+  const x = array[0].length
+  const headerLine = `x = ${x}, y = ${y}, rule = B3/S23`
+  let string = ``
+  array.forEach((row, idx) => {
+    let identicalCount = 0
+    let previousCharacter = row[0]
+    row.forEach(character => {
+      identicalCount++
+      if (previousCharacter === character) return;
+      string += identicalCount
+      string += previousCharacter
+      identicalCount = 0;
+      previousCharacter = character
+    })
+    string += identicalCount
+    string += previousCharacter
+    string += (idx === array.length - 1) ? '!' : '$'
+  })
+
+  return headerLine + '\n' + string.replaceAll('x', 'o').replaceAll('.', 'b')
 }

@@ -30,7 +30,7 @@ describe('RLEtools', () => {
     expect(output).to.have.deep.members(expectedOutput)
   })
 
-  xit('encode should turn 2 dimensional array into a block', () => {
+  it('encode should turn 2 dimensional array into a block', () => {
     const array = [
       ['x', 'x'],
       ['x', 'x']
