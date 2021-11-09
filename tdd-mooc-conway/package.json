@@ -1,0 +1,24 @@
+{
+  "name": "mocha-tests",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha 'test/*.test.mjs'",
+    "test:watch": "npm run test -- --watch"
+  },
+  "mocha": {
+    "parallel": true
+  },
+  "engines": {
+    "node": ">=16.0.0",
+    "npm": ">=7.0.0"
+  },
+  "devDependencies": {
+    "chai": "^4.3.4",
+    "mocha": "^9.1.3"
+  },
+  "dependencies": {
+    "lodash": "^4.17.21"
+  }
+}

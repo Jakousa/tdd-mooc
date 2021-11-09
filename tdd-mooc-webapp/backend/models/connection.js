@@ -5,7 +5,7 @@ const knex = Knex({
   client: "pg",
   version: "13",
   connection: {
-    host: "127.0.0.1",
+    host: process.env.DATABASE_HOST || "127.0.0.1",
     port: 5432,
     user: "webapp",
     password: "secret",
